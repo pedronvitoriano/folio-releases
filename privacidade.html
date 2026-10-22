@@ -13,24 +13,26 @@
   header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
   .marca { font: 600 22px/1 Fraunces, Georgia, serif; letter-spacing: -.01em; }
   header nav a { color: var(--ink-2); text-decoration: none; margin-left: 18px; font-size: 15px; }
-  .heroi { padding: 56px 0 40px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; }
+  .heroi { padding: 48px 0 40px; }
+  .heroi-texto { max-width: 720px; margin-bottom: 36px; }
   h1 { font: 600 clamp(36px, 6vw, 60px)/1.05 Fraunces, Georgia, serif; letter-spacing: -.02em; margin: 0 0 18px; }
   .lead { color: var(--ink-2); font-size: 19px; max-width: 34em; margin: 0 0 28px; }
   .baixar { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 12px; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
   .baixar:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   .outros { display: block; margin-top: 14px; color: var(--ink-3); font-size: 14px; }
   .outros a { color: var(--ink-2); }
-  .folha { aspect-ratio: 3 / 4; border-radius: 6px; background: #FBF8F1; box-shadow: 0 1px 0 var(--line), 0 24px 60px -30px rgba(27, 26, 23, .45); padding: 9% 10%; color: #1B1A17; position: relative; }
-  .folha::before, .folha::after { content: ''; position: absolute; inset: 0; border-radius: 6px; background: #F2ECDF; transform: rotate(-4deg) translate(-14px, 10px); z-index: -1; }
-  .folha::after { transform: rotate(3deg) translate(14px, 8px); background: #E9E1D1; z-index: -2; }
-  .folha b { display: block; font: 600 22px/1.2 Fraunces, Georgia, serif; margin-bottom: 14px; color: #23395B; }
-  .folha i { display: block; height: 9px; border-radius: 3px; background: #E5DED0; margin: 10px 0; }
-  .folha i:nth-child(3) { width: 86%; } .folha i:nth-child(5) { width: 64%; } .folha i.t { background: #B4412B; opacity: .8; width: 30%; height: 9px; }
+  .captura { margin: 8px 0 0; }
+  .captura img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
+  .captura figcaption { margin-top: 10px; color: var(--ink-3); font-size: 14px; }
   section { padding: 40px 0; border-top: 1px solid var(--line); }
   h2 { font: 600 28px/1.2 Fraunces, Georgia, serif; margin: 0 0 22px; }
-  .frentes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; }
-  .frentes h3 { font-size: 17px; margin: 0 0 6px; }
-  .frentes p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  .frentes { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+  .lider h3 { font: 600 24px/1.25 Fraunces, Georgia, serif; margin: 0 0 10px; }
+  .lider p { margin: 0; color: var(--ink-2); }
+  .outras { margin: 0; }
+  .outras dt { font-weight: 600; padding-top: 14px; border-top: 1px solid var(--line); }
+  .outras dt:first-child { padding-top: 0; border-top: 0; }
+  .outras dd { margin: 4px 0 14px; color: var(--ink-2); font-size: 16px; }
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
   td, th { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--ink-3); font-weight: 500; }
@@ -39,7 +41,7 @@
   .priv ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
   footer { padding: 28px 0 48px; color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--line); }
   footer a { color: var(--ink-2); margin-right: 16px; }
-  @media (max-width: 760px) { .heroi, .priv { grid-template-columns: 1fr; } .folha { max-width: 260px; margin: 0 auto 8px; } .frentes { grid-template-columns: 1fr; } header nav { display: none; } td:nth-child(3) { display: none; } }
+  @media (max-width: 760px) { .priv, .frentes { grid-template-columns: 1fr; } header nav { display: none; } td:nth-child(3) { display: none; } }
 
 .doc { max-width: 760px; padding-bottom: 40px; } .doc h1 { font-size: 40px; } .doc h2 { font-size: 22px; margin-top: 28px; } .doc a { color: var(--accent); }
 </style></head><body><div class="wrap"><header><a class="marca" href="index.html" style="color:inherit;text-decoration:none">Folio</a></header>
