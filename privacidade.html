@@ -3,45 +3,80 @@
 <title>Política de privacidade — Folio</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* identidade do app: papel creme, tinta escura e terracota (src/styles/tokens.css, tema Papel e Tinta) */
-  :root { --bg: #F7F3EA; --bg-2: #EFE9DC; --ink: #1B1A17; --ink-2: #4A463E; --ink-3: #676154; --line: #E2DACB; --accent: #B4412B; --on-accent: #FFFFFF; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #14130F; --bg-2: #1A1814; --ink: #ECE6D8; --ink-2: #B7AF9F; --ink-3: #908979; --line: #2C2820; --accent: #E07A5F; --on-accent: #14130F; } }
+  /* identidade do app: papel creme, tinta escura e terracota (src/styles/tokens.css, temas Papel e Tinta) */
+  :root { --bg: #F7F3EA; --bg-2: #EFE9DC; --ink: #1B1A17; --ink-2: #4A463E; --ink-3: #676154; --line: #E2DACB; --accent: #B4412B; --accent-ink: #9A3622; --on-accent: #FFFFFF; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #14130F; --bg-2: #1C1A15; --ink: #ECE6D8; --ink-2: #B7AF9F; --ink-3: #908979; --line: #2C2820; --accent: #E07A5F; --accent-ink: #E8917A; --on-accent: #14130F; } }
   * { box-sizing: border-box; }
   html, body { overflow-x: hidden; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 Inter, system-ui, sans-serif; }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
   header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
-  .marca { font: 600 22px/1 Fraunces, Georgia, serif; letter-spacing: -.01em; }
-  header nav a { color: var(--ink-2); text-decoration: none; margin-left: 18px; font-size: 15px; }
-  .heroi { padding: 48px 0 40px; }
-  .heroi-texto { max-width: 720px; margin-bottom: 36px; }
-  h1 { font: 600 clamp(36px, 6vw, 60px)/1.05 Fraunces, Georgia, serif; letter-spacing: -.02em; margin: 0 0 18px; }
-  .lead { color: var(--ink-2); font-size: 19px; max-width: 34em; margin: 0 0 28px; }
-  .baixar { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 12px; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
-  .baixar:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-  .outros { display: block; margin-top: 14px; color: var(--ink-3); font-size: 14px; }
-  .outros a { color: var(--ink-2); }
-  .captura { margin: 8px 0 0; }
-  .captura img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
-  .captura figcaption { margin-top: 10px; color: var(--ink-3); font-size: 14px; }
-  section { padding: 40px 0; border-top: 1px solid var(--line); }
-  h2 { font: 600 28px/1.2 Fraunces, Georgia, serif; margin: 0 0 22px; }
-  .frentes { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
-  .lider h3 { font: 600 24px/1.25 Fraunces, Georgia, serif; margin: 0 0 10px; }
+  .marca { font: 600 22px/1 Fraunces, Georgia, serif; letter-spacing: -.01em; text-decoration: none; }
+  header nav a { color: var(--ink-2); text-decoration: none; margin-left: 20px; font-size: 15px; }
+  header nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* topo: manchete, download do sistema de quem visita e o produto aberto */
+  .heroi { padding: 44px 0 40px; }
+  .heroi-texto { max-width: 760px; margin-bottom: 40px; }
+  h1 { font: 600 clamp(38px, 6.4vw, 64px)/1.03 Fraunces, Georgia, serif; letter-spacing: -.022em; margin: 0 0 18px; }
+  h1 em { font-style: normal; color: var(--accent-ink); }
+  .lead { color: var(--ink-2); font-size: 19px; max-width: 36em; margin: 0 0 30px; }
+  .download { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+  .baixar { display: inline-flex; align-items: center; gap: 12px; padding: 15px 24px; border-radius: 12px; border: 0; background: var(--accent); color: var(--on-accent); font: 600 17px/1.2 Inter, system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+  .baixar:hover { filter: brightness(1.06); }
+  .baixar svg { flex: none; }
+  .meta { color: var(--ink-3); font-size: 14px; line-height: 1.5; }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+  .alternativa { margin-top: 14px; color: var(--ink-3); font-size: 14px; }
+  .alternativa a { color: var(--ink-2); text-underline-offset: 3px; }
+  .celular { display: none; max-width: 34em; padding: 16px 18px; border-left: 3px solid var(--accent); background: var(--bg-2); border-radius: 0 10px 10px 0; color: var(--ink-2); font-size: 16px; }
+  .celular p { margin: 0 0 12px; }
+  .copiado { margin-left: 12px; color: var(--ink-3); font-size: 14px; }
+
+  figure { margin: 0; }
+  .captura img, .galeria img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); }
+  figcaption { margin-top: 10px; color: var(--ink-3); font-size: 14px; }
+
+  section { padding: 48px 0; border-top: 1px solid var(--line); }
+  h2 { font: 600 30px/1.18 Fraunces, Georgia, serif; letter-spacing: -.01em; margin: 0 0 24px; }
+  .frentes { display: grid; grid-template-columns: 1.1fr 1fr; gap: 44px; align-items: start; }
+  .lider h3 { font: 600 25px/1.25 Fraunces, Georgia, serif; margin: 0 0 10px; }
   .lider p { margin: 0; color: var(--ink-2); }
   .outras { margin: 0; }
   .outras dt { font-weight: 600; padding-top: 14px; border-top: 1px solid var(--line); }
   .outras dt:first-child { padding-top: 0; border-top: 0; }
   .outras dd { margin: 4px 0 14px; color: var(--ink-2); font-size: 16px; }
+  .galeria { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; margin-top: 40px; align-items: start; }
+
+  /* tabela de downloads: a linha do sistema de quem visita ganha um fio da cor de destaque */
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  td, th { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td, th { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--ink-3); font-weight: 500; }
-  td a { color: var(--accent); font-weight: 600; }
-  .priv { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  td a { color: var(--accent-ink); font-weight: 600; text-underline-offset: 3px; }
+  td.tam { color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.seu td { background: var(--bg-2); }
+  tr.seu td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+  tr.seu .eh-seu { display: block; color: var(--accent-ink); font-size: 13px; font-weight: 600; }
+  .eh-seu { display: none; }
+  .nota-tabela { margin: 14px 0 0; color: var(--ink-3); font-size: 14px; }
+
+  .priv { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+  .priv p { color: var(--ink-2); margin: 0; }
   .priv ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+  .priv li + li { margin-top: 8px; }
   footer { padding: 28px 0 48px; color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--line); }
-  footer a { color: var(--ink-2); margin-right: 16px; }
-  @media (max-width: 760px) { .priv, .frentes { grid-template-columns: 1fr; } header nav { display: none; } td:nth-child(3) { display: none; } }
+  footer a { color: var(--ink-2); margin-right: 18px; text-underline-offset: 3px; }
+
+  @media (max-width: 760px) {
+    .priv, .frentes, .galeria { grid-template-columns: 1fr; }
+    header nav { display: none; }
+    td:nth-child(3) { display: none; }
+    .heroi { padding-top: 24px; }
+  }
+  body.mobile .download, body.mobile .alternativa { display: none; }
+  body.mobile .celular { display: block; }
 
 .doc { max-width: 760px; padding-bottom: 40px; } .doc h1 { font-size: 40px; } .doc h2 { font-size: 22px; margin-top: 28px; } .doc a { color: var(--accent); }
 </style></head><body><div class="wrap"><header><a class="marca" href="index.html" style="color:inherit;text-decoration:none">Folio</a></header>
