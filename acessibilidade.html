@@ -35,16 +35,21 @@ no GitHub Pages).</p>
 <li><strong>Teclado:</strong> todos os links e botões são alcançados com Tab, na ordem da leitura, com contorno de foco visível.</li>
 <li><strong>Leitor de tela:</strong> um título principal, regiões nomeadas, imagens com descrição e a troca de sistema no painel de
 download anunciada. As capturas que só decoram a animação ficam escondidas do leitor, sem esconder controles.</li>
-<li><strong>Movimento:</strong> a troca automática das telas no topo tem botão <strong>Pausar</strong>, para quando o mouse ou o foco estão nela e
-não acontece quando o sistema pede menos movimento; nesse caso também saem o desfoque e a inclinação.</li>
-<li><strong>Contraste:</strong> todo texto tem pelo menos 4,5:1 sobre o fundo. Isso é conferido automaticamente a cada mudança.</li>
+<li><strong>Movimento:</strong> o vídeo do app no topo tem botões para pausar, voltar e avançar, para quando sai da tela e não toca
+sozinho quando o sistema pede menos movimento (aí também saem o desfoque e a inclinação). Os vídeos de cada formato
+tocam uma vez, sem som, e têm descrição em texto.</li>
+<li><strong>Contraste:</strong> todo texto tem pelo menos 4,5:1 sobre o fundo.</li>
+<li><strong>Conferência automática a cada mudança:</strong> testes no Chrome em seis situações (computador, celular, 320 px, movimento
+reduzido) com as regras de acessibilidade do axe-core (nenhuma violação séria), sem rolagem lateral, sem pulo de
+layout e com o botão de download alcançado pelo teclado.</li>
 <li><strong>Tela pequena e zoom:</strong> o site funciona a partir de 320 px de largura sem rolagem lateral, e o zoom não é bloqueado.</li>
 <li><strong>Sem JavaScript:</strong> o conteúdo e todos os downloads continuam disponíveis.</li>
 </ul>
 <h2>Limites conhecidos</h2>
 <ul>
 <li>O site ainda não foi testado com leitores de tela de verdade (NVDA, VoiceOver); as conferências são automáticas.</li>
-<li>As capturas de tela mostram texto pequeno do app como imagem; o que importa delas está escrito ao lado.</li>
+<li>Os vídeos mostram texto pequeno do app; o que importa deles está escrito ao lado de cada um.</li>
+<li>Safari e iPhone de verdade ainda não foram testados; a conferência usa Chrome, Firefox e o motor do Safari (WebKit) no Windows.</li>
 </ul>
 <h2>Encontrou uma barreira?</h2>
 <p>Conte em <a href="https://github.com/pedronvitoriano/folio-releases/issues">https://github.com/pedronvitoriano/folio-releases/issues</a> o que tentou fazer, a página e o navegador. Se

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Folio: abra qualquer arquivo</title>
-<meta name="description" content="Um app gratuito que abre Word, Excel, PowerPoint, PDF, vídeos, músicas, código, modelos 3D e mais de 300 formatos, no Windows, no Mac e no Linux.">
+<meta name="description" content="Um app gratuito que abre Word, Excel, PowerPoint, PDF, vídeos, músicas, código, modelos 3D e mais de 700 tipos de arquivo, no seu computador, sem internet. Windows, Mac e Linux.">
 <link rel="canonical" href="https://folio.pedronvitoriano.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Folio: abra qualquer arquivo">
-<meta property="og:description" content="Word, Excel, PDF, vídeo, 3D e mais de 300 formatos num app gratuito para Windows, Mac e Linux.">
+<meta property="og:description" content="Word, Excel, PDF, vídeo, 3D e mais de 700 tipos de arquivo num app gratuito que roda no seu computador. Windows, Mac e Linux.">
 <meta property="og:url" content="https://folio.pedronvitoriano.com/">
 <meta property="og:image" content="https://folio.pedronvitoriano.com/og.png">
 <meta property="og:image:width" content="1200">
@@ -19,12 +19,17 @@
 <meta name="theme-color" content="#16140F">
 <link rel="preload" href="fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Folio","description":"App gratuito que abre Word, Excel, PowerPoint, PDF, vídeos, músicas, código, modelos 3D e mais de 300 formatos.","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 10, Windows 11, macOS 11 ou mais novo, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Person","name":"Pedro Vitoriano","url":"https://pedronvitoriano.com"},"downloadUrl":"https://folio.pedronvitoriano.com/#baixar","image":"https://folio.pedronvitoriano.com/og.png","inLanguage":"pt-BR"}</script>
-<link rel="preload" as="image" href="img/cap-word.webp" imagesrcset="img/cap-word-p.webp 760w, img/cap-word.webp 1400w" imagesizes="(max-width: 900px) 92vw, 56vw">
-<script>document.documentElement.classList.add('js');</script>
+<link rel="preload" href="img/filme.webp" as="image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Folio","description":"App gratuito que abre Word, Excel, PowerPoint, PDF, vídeos, músicas, código, modelos 3D e mais de 700 tipos de arquivo, no seu computador.","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows 10, Windows 11, macOS 11 ou mais novo, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Person","name":"Pedro Vitoriano","url":"https://pedronvitoriano.com"},"downloadUrl":"https://folio.pedronvitoriano.com/#baixar","image":"https://folio.pedronvitoriano.com/og.png","video":{"@type":"VideoObject","name":"O Folio em uso","description":"O app abrindo um relatório do Word, uma planilha, uma apresentação, um PDF, um vídeo, um modelo 3D, código e uma música.","thumbnailUrl":"https://folio.pedronvitoriano.com/img/filme.webp","contentUrl":"https://folio.pedronvitoriano.com/img/filme.mp4","uploadDate":"2026-10-23"},"inLanguage":"pt-BR"}</script>
 <style>
   @font-face { font-family: 'Newsreader'; src: url(fonts/newsreader-latin-wght-normal.woff2) format('woff2'); font-weight: 200 800; font-display: swap; }
   @font-face { font-family: 'Inter'; src: url(fonts/inter-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+  /* reservas calibradas: ocupam a mesma largura das fontes do site, então nada pula quando elas chegam
+     (larguras medidas no Chrome: Newsreader = 83,3% da Georgia e 99,9% da Times; Inter = 108,5% da Segoe UI e 105,8% da Arial) */
+  @font-face { font-family: 'Newsreader-G'; src: local('Georgia'); size-adjust: 83.3%; }
+  @font-face { font-family: 'Newsreader-T'; src: local('Times New Roman'); size-adjust: 99.9%; }
+  @font-face { font-family: 'Inter-S'; src: local('Segoe UI'); size-adjust: 108.5%; }
+  @font-face { font-family: 'Inter-A'; src: local('Arial'); size-adjust: 105.8%; }
   /* materiais do ícone do Folio: a mesa escura, a folha creme e a aba terracota (assets/icon.html) */
   :root {
     --mesa: #16140F; --mesa-2: #1E1B15; --mesa-3: #2A261E; --fio-mesa: #322D24;
@@ -32,33 +37,35 @@
     --folha: #F7F3EA; --folha-2: #EFE9DC; --fio-folha: #E0D8C8;
     --tinta: #1B1A17; --tinta-2: #4A463E; --tinta-3: #676154;
     --aba: #B4412B; --aba-viva: #E07A5F;
+    --serif: Newsreader, Newsreader-G, Newsreader-T, Georgia, serif;
+    --sans: Inter, Inter-S, Inter-A, system-ui, sans-serif;
     --sai: cubic-bezier(0.23, 1, 0.32, 1); --move: cubic-bezier(0.77, 0, 0.175, 1);
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
-  body { overflow-x: clip; }
-  body { margin: 0; background: var(--mesa); color: var(--luz); font: 400 17px/1.6 Inter, 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; overflow-x: clip; background: var(--mesa); color: var(--luz); font: 400 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  body.com-barra { padding-bottom: 96px; }
   .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
   a { color: inherit; }
   a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--aba-viva); outline-offset: 3px; border-radius: 6px; }
-  img { display: block; max-width: 100%; height: auto; }
-  h1, h2, h3 { font-family: Newsreader, Georgia, serif; font-weight: 560; letter-spacing: -0.02em; margin: 0; }
+  img, video { display: block; max-width: 100%; height: auto; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 560; letter-spacing: -0.02em; margin: 0; }
 
   /* topo */
   header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
-  .marca { display: inline-flex; align-items: center; gap: 10px; font: 600 22px/1 Newsreader, Georgia, serif; text-decoration: none; }
+  .marca { display: inline-flex; align-items: center; gap: 10px; font: 600 22px/1 var(--serif); text-decoration: none; }
   .marca svg { width: 30px; height: 30px; }
   header nav a { display: inline-block; padding: 10px 0; color: var(--luz-2); text-decoration: none; margin-left: 22px; font-size: 15px; }
   header nav a:hover { color: var(--luz); text-decoration: underline; text-underline-offset: 4px; }
 
-  /* abertura: manchete e download no centro; embaixo, o palco com as janelas do app em arco 3D sobre a mesa */
+  /* abertura: manchete e download no centro; embaixo, o palco com o app em uso e as outras telas em arco 3D */
   .abertura { padding: 32px 0 4px; }
   .chamada { max-width: 1060px; margin: 0 auto; text-align: center; }
-  h1 { font-size: clamp(48px, 6.7vw, 98px); line-height: .96; letter-spacing: -0.035em; margin-bottom: 22px; }
+  h1 { font-size: clamp(46px, 6.6vw, 96px); line-height: .96; letter-spacing: -0.035em; margin-bottom: 22px; }
   h1 .linha { display: inline-block; }
-  .lead { color: var(--luz-2); font-size: 20px; max-width: 42em; margin: 0 auto 28px; text-wrap: balance; }
+  .lead { color: var(--luz-2); font-size: 20px; max-width: 40em; margin: 0 auto 28px; text-wrap: balance; }
   .acao { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 20px; }
-  .baixar { display: inline-flex; align-items: center; gap: 12px; padding: 17px 28px 17px 24px; border-radius: 12px; border: 0; background: var(--folha); color: var(--tinta); font: 600 17px/1.2 Inter, system-ui, sans-serif; text-decoration: none; cursor: pointer; box-shadow: 0 10px 30px -10px rgba(255, 238, 204, .35); transition: background-color .15s ease, transform .15s ease; }
+  .baixar { display: inline-flex; align-items: center; gap: 12px; padding: 17px 28px 17px 24px; border-radius: 12px; border: 0; background: var(--folha); color: var(--tinta); font: 600 17px/1.2 var(--sans); text-decoration: none; cursor: pointer; box-shadow: 0 10px 30px -10px rgba(255, 238, 204, .35); transition: background-color .15s ease, transform .15s ease; }
   .baixar:active { transform: scale(.97); }
   .baixar.escuro { background: var(--tinta); color: var(--folha); box-shadow: 0 14px 30px -14px rgba(27, 26, 23, .6); }
   .baixar .aba { width: 6px; height: 22px; border-radius: 3px; background: var(--aba); flex: none; }
@@ -66,41 +73,45 @@
   .meta b { color: var(--luz-2); font-weight: 600; }
   .alternativa { margin: 8px 0 0; color: var(--luz-3); font-size: 14px; }
   .alternativa a { color: var(--luz-2); text-underline-offset: 3px; }
-  .celular { display: none; max-width: 32em; margin: 0 auto; color: var(--luz-2); font-size: 16px; }
+  .so-celular { display: none; }
+  .celular { max-width: 32em; margin: 0 auto; color: var(--luz-2); font-size: 16px; }
   .celular p { margin: 0 0 14px; }
   .copiado { display: block; margin-top: 12px; color: var(--luz-3); font-size: 14px; }
-  body.mobile .acao, body.mobile .alternativa, body.mobile .meta { display: none; }
-  body.mobile .celular { display: block; }
+  body.mobile .so-computador { display: none; }
+  body.mobile .so-celular { display: block; }
 
   .palco-abertura { position: relative; padding: 28px 0 88px; perspective: 1900px; overflow: clip; }
   .palco-abertura::before { content: ''; position: absolute; inset: -10% 0 0; background: radial-gradient(ellipse 46% 52% at var(--luz-x, 50%) 46%, rgba(255, 238, 204, .1), rgba(255, 238, 204, 0) 72%); pointer-events: none; }
-  .arco { position: relative; width: min(640px, 76vw); aspect-ratio: 1920 / 1094; margin: 0 auto; transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
-  .janela { position: absolute; inset: 0; border-radius: 10px; overflow: hidden; background: var(--folha); box-shadow: 0 50px 90px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(236, 230, 216, .07); cursor: pointer;
-    -webkit-box-reflect: below 3px linear-gradient(transparent 74%, rgba(255, 255, 255, .13));
-    transition: transform 1s var(--move), opacity .8s var(--sai); }
-  .janela img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-  .janela::after { content: ''; position: absolute; inset: 0; background: var(--mesa); opacity: var(--sombra, 0); transition: opacity .9s var(--sai); pointer-events: none; }
-  html:not(.js) .janela + .janela { display: none; }
+  .arco { position: relative; width: min(680px, 80vw); aspect-ratio: 1280 / 730; margin: 0 auto; transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+  .janela { position: absolute; inset: 0; border-radius: 10px; overflow: hidden; background: var(--folha); box-shadow: 0 50px 90px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(236, 230, 216, .07);
+    -webkit-box-reflect: below 3px linear-gradient(transparent 74%, rgba(255, 255, 255, .13)); }
+  .janela img, .janela video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .janela::after { content: ''; position: absolute; inset: 0; background: var(--mesa); opacity: var(--sombra, 0); pointer-events: none; }
+  .janela.lado { cursor: pointer; transition: translate .45s var(--sai); }
+  .janela-filme { z-index: 10; }
   .arco-rodape { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 900px; margin-top: 64px; }
   .legenda { margin: 0; color: var(--luz-3); font-size: 15px; transition: opacity .3s ease; }
   .legenda b { color: var(--luz); font-weight: 600; }
   .controles { display: flex; gap: 8px; flex: none; }
-  .controles button { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 12px; border: 1px solid var(--fio-mesa); border-radius: 10px; background: none; color: var(--luz-2); font: 500 14px/1 Inter, system-ui, sans-serif; cursor: pointer; }
+  .controles button { display: inline-grid; place-items: center; min-width: 44px; height: 44px; padding: 0 14px; border: 1px solid var(--fio-mesa); border-radius: 10px; background: none; color: var(--luz-2); font: 500 14px/1 var(--sans); cursor: pointer; }
   .controles button:hover { color: var(--luz); border-color: var(--luz-3); }
 
   /* download de novo depois do passeio, e a barra que acompanha a rolagem */
   .fecho { margin-top: 112px; padding: 56px 0 8px; border-top: 1px solid var(--fio-folha); text-align: center; }
   .fecho h2 { margin-bottom: 28px; }
   .fecho p { margin: 16px 0 0; color: var(--tinta-3); font-size: 15px; }
-  .barra { position: fixed; left: 50%; bottom: 18px; z-index: 50; display: flex; align-items: center; gap: 22px; padding: 10px 10px 10px 20px; border-radius: 16px; background: rgba(30, 27, 21, .94); border: 1px solid var(--fio-mesa); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .7); color: var(--luz); transform: translate(-50%, 160%); transition: transform .5s var(--sai); }
+  .fecho .aviso { color: var(--tinta); }
+  .fecho .aviso a { color: var(--aba); }
+  .barra { position: fixed; left: 50%; bottom: 18px; z-index: 50; display: flex; align-items: center; gap: 22px; padding: 10px 10px 10px 20px; border-radius: 16px; background: rgba(30, 27, 21, .96); border: 1px solid var(--fio-mesa); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .7); color: var(--luz); transform: translate(-50%, 160%); transition: transform .5s var(--sai); }
   .barra.visivel { transform: translate(-50%, 0); }
-  .barra-marca { display: inline-flex; align-items: center; gap: 10px; font: 600 18px/1 Newsreader, Georgia, serif; white-space: nowrap; }
+  .barra-marca { display: inline-flex; align-items: center; gap: 10px; font: 600 18px/1 var(--serif); white-space: nowrap; }
   .barra-marca svg { width: 24px; height: 24px; }
-  .barra-marca span { font: 400 14px/1 Inter, system-ui, sans-serif; color: var(--luz-3); }
+  .barra-marca span { font: 400 14px/1 var(--sans); color: var(--luz-3); }
   .barra .baixar { padding: 12px 20px 12px 16px; font-size: 15px; box-shadow: none; }
+  .barra .aviso { margin: 0; font-size: 14px; max-width: 18em; }
   body.mobile .barra { display: none; }
 
-  /* passeio: palco fixo com o arquivo da etapa ativa, num mundo claro */
+  /* passeio: palco fixo com o app em uso no formato da etapa ativa, num mundo claro */
   .claro { background: var(--folha); color: var(--tinta); }
   .passeio { padding: 120px 0 80px; }
   .passeio-cabeca { max-width: 760px; margin-bottom: 40px; }
@@ -110,15 +121,15 @@
   .passos { list-style: none; margin: 0; padding: 0; position: relative; }
   .passos::before, .passos::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--fio-folha); }
   .passos::after { background: var(--aba); transform: scaleY(var(--prog, 0)); transform-origin: top; }
-  .passo { min-height: 56vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 24px 26px; }
+  .passo { min-height: 52vh; display: flex; flex-direction: column; justify-content: center; padding: 24px 0 24px 26px; }
   .passo h3 { font-size: 32px; line-height: 1.1; margin-bottom: 10px; color: var(--tinta-3); transition: color .4s var(--sai); }
   .passo.ativo h3 { color: var(--tinta); }
   .passo p { margin: 0; color: var(--tinta-2); max-width: 26em; }
   .passo .formatos { margin-top: 10px; color: var(--tinta-3); font-size: 14px; }
-  .passo img { display: none; }
+  .passo video { display: none; }
   .palco-col { position: relative; }
   .palco { position: sticky; top: calc(50vh - min(19vw - 20px, 208px)); perspective: 1600px; }
-  .tela { position: relative; aspect-ratio: 1920 / 1094; border-radius: 12px; overflow: hidden; background: var(--folha-2); box-shadow: 0 50px 90px -40px rgba(27, 26, 23, .45), 0 0 0 1px rgba(27, 26, 23, .08); transform-origin: 50% 100%; transform: rotateX(var(--inclina, 0deg)) scale(var(--escala, 1)); }
+  .tela { position: relative; aspect-ratio: 1120 / 638; border-radius: 12px; overflow: hidden; background: var(--folha-2); box-shadow: 0 50px 90px -40px rgba(27, 26, 23, .45), 0 0 0 1px rgba(27, 26, 23, .08); transform-origin: 50% 100%; transform: rotateX(var(--inclina, 0deg)) scale(var(--escala, 1)); }
   .tela > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: translateY(9%) scale(.985); transition: opacity .5s var(--sai), transform .8s var(--sai); }
   .tela > .de-cima:not(.ativo), .tela > .sai { transform: translateY(-9%) scale(.985); }
   .tela > .volta { transform: translateY(9%) scale(.985); }
@@ -131,19 +142,19 @@
   .download { padding: 120px 0 96px; }
   .download-grade { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 72px; align-items: start; }
   .seu-sistema .rotulo { color: var(--luz-3); font-size: 15px; margin: 0 0 4px; }
-  .seu-sistema .nome { font: 560 clamp(40px, 5.4vw, 72px)/1 Newsreader, Georgia, serif; letter-spacing: -0.03em; margin: 0 0 28px; }
+  .seu-sistema .nome { font: 560 clamp(40px, 5.4vw, 72px)/1 var(--serif); letter-spacing: -0.03em; margin: 0 0 28px; }
   .instalar { counter-reset: p; list-style: none; margin: 36px 0 0; padding: 0; max-width: 34em; }
   .instalar li { counter-increment: p; position: relative; padding: 0 0 18px 44px; color: var(--luz-2); }
-  .instalar li::before { content: counter(p); position: absolute; left: 0; top: -1px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--fio-mesa); color: var(--luz); font-size: 14px; font-weight: 600; display: grid; place-items: center; }
+  .instalar li::before { content: counter(p); position: absolute; left: 0; top: -1px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--fio-mesa); color: var(--luz); font-size: 14px; font-weight: 600; display: grid; place-items: center; transition: border-color .4s var(--sai), background-color .4s var(--sai); }
+  .instalar.realce li::before { border-color: var(--aba-viva); background: var(--mesa-3); }
   .instalar b { color: var(--luz); font-weight: 600; }
   .outros h3 { font-size: 24px; margin-bottom: 8px; }
   .outros p.nota { margin: 0 0 14px; color: var(--luz-3); font-size: 14px; }
   .lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fio-mesa); }
   .lista li { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--fio-mesa); }
-  .lista button { flex: 1; text-align: left; padding: 15px 0; background: none; border: 0; color: var(--luz-2); font: 500 16px/1.3 Inter, system-ui, sans-serif; cursor: pointer; }
-  .lista button:hover { color: var(--luz); }
-  .lista button[aria-current='true'] { color: var(--luz); }
-  .lista button[aria-current='true']::before { content: ''; display: inline-block; width: 4px; height: 16px; margin-right: 10px; border-radius: 2px; background: var(--aba-viva); vertical-align: -2px; }
+  .lista button { flex: 1; text-align: left; padding: 15px 0; background: none; border: 0; color: var(--luz-2); font: 500 16px/1.3 var(--sans); cursor: pointer; }
+  .lista button:hover, .lista button[aria-pressed='true'] { color: var(--luz); }
+  .lista button[aria-pressed='true']::before { content: ''; display: inline-block; width: 4px; height: 16px; margin-right: 10px; border-radius: 2px; background: var(--aba-viva); vertical-align: -2px; }
   .lista a { color: var(--aba-viva); font-weight: 600; font-size: 15px; text-underline-offset: 3px; white-space: nowrap; padding: 12px 0; }
   .lista .tam { color: var(--luz-3); font-weight: 400; font-variant-numeric: tabular-nums; }
   details { margin-top: 26px; color: var(--luz-2); font-size: 15px; }
@@ -151,25 +162,21 @@
   summary:hover { color: var(--luz); }
   details p, details ul { margin: 12px 0 0; }
   details code { font: 14px/1.5 Consolas, ui-monospace, monospace; color: var(--luz); background: var(--mesa-3); padding: 2px 6px; border-radius: 4px; }
+  .aviso { margin: 14px 0 0; color: var(--luz); font-size: 15px; }
+  .aviso:empty { display: none; }
+  .aviso a { color: var(--aba-viva); text-underline-offset: 3px; }
 
   .situacoes { margin-bottom: 120px; }
   .situacoes h2 { max-width: 15em; }
   .situacoes dl { margin: 36px 0 0; border-top: 1px solid var(--fio-folha); }
   .situacoes dl > div { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 32px; padding: 18px 0; border-bottom: 1px solid var(--fio-folha); }
-  .situacoes dt { font: 560 22px/1.25 Newsreader, Georgia, serif; color: var(--tinta); }
+  .situacoes dt { font: 560 22px/1.25 var(--serif); color: var(--tinta); transition: transform .35s var(--sai), color .2s ease; }
   .situacoes dd { margin: 0; color: var(--tinta-2); align-self: center; }
-  .situacoes dt { transition: transform .35s var(--sai), color .2s ease; }
-  .passo video { display: none; }
-  .aviso { margin: 14px 0 0; color: var(--luz); font-size: 15px; }
-  .aviso:empty { display: none; }
-  .aviso a { color: var(--aba-viva); text-underline-offset: 3px; }
-  .instalar li::before { transition: border-color .4s var(--sai), background-color .4s var(--sai); }
-  .instalar.realce li::before { border-color: var(--aba-viva); background: var(--mesa-3); }
   .perguntas { padding: 96px 0; }
   .perguntas h2 { font-size: clamp(32px, 3.6vw, 46px); margin-bottom: 24px; }
   .faq { border-top: 1px solid var(--fio-folha); max-width: 860px; }
   .faq details { margin: 0; border-bottom: 1px solid var(--fio-folha); color: var(--tinta-2); font-size: 17px; }
-  .faq summary { padding: 18px 0; color: var(--tinta); font: 560 21px/1.3 Newsreader, Georgia, serif; }
+  .faq summary { padding: 18px 0; color: var(--tinta); font: 560 21px/1.3 var(--serif); }
   .faq summary:hover { color: var(--aba); }
   .faq details p { margin: 0 0 20px; max-width: 40em; }
   .faq a { color: var(--aba); text-underline-offset: 3px; }
@@ -185,26 +192,28 @@
   footer .marca { font-size: 18px; color: var(--luz); margin-right: auto; }
   footer .marca svg { width: 24px; height: 24px; }
 
-  /* entrada única ao carregar: a manchete sai do desfoque e as folhas pousam na pilha */
-  .js h1 .linha, .js .lead, .js .acao, .js .alternativa, .js .celular { opacity: 0; }
-  .js .entrou h1 .linha { animation: desfoque 1s var(--sai) both; }
-  .js .entrou h1 .linha + .linha { animation-delay: .09s; }
-  .js .entrou .lead { animation: sobe .8s var(--sai) .28s both; }
-  .js .entrou .acao, .js .entrou .celular { animation: sobe .8s var(--sai) .4s both; }
-  .js .entrou .alternativa { animation: sobe .8s var(--sai) .5s both; }
+  /* entrada única ao carregar, só com CSS (funciona sem JavaScript): a manchete sai do desfoque e o resto sobe */
+  h1 .linha { animation: desfoque 1s var(--sai) both; }
+  h1 .linha + .linha { animation-delay: .09s; }
+  .lead { animation: sobe .8s var(--sai) .28s both; }
+  .acao, .celular { animation: sobe .8s var(--sai) .4s both; }
+  .meta, .alternativa { animation: sobe .8s var(--sai) .5s both; }
+  .arco { animation: pousa 1.3s var(--sai) .35s both; }
   @keyframes desfoque { from { opacity: 0; filter: blur(14px); transform: translateY(18px); } to { opacity: 1; filter: none; transform: none; } }
   @keyframes sobe { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes pousa { from { opacity: 0; translate: 0 12%; } to { opacity: 1; translate: 0 0; } } /* translate separado do transform: a inclinação pelo mouse continua livre */
+  @media (scripting: none) { .janela.lado, .controles { display: none; } }
 
   @media (hover: hover) and (pointer: fine) {
     .baixar:hover { background: #FFFFFF; }
+    .baixar.escuro:hover { background: #000000; }
+    .janela.lado:hover { translate: 0 -2%; }
     .situacoes dl > div:hover dt { transform: translateX(8px); color: var(--aba); }
-    .lista li:hover button { color: var(--luz); }
   }
-  .seu-sistema .nome { will-change: transform; }
   @media (max-width: 900px) {
     .abertura { padding: 28px 0 24px; }
     .lead { font-size: 18px; }
-    .arco { width: 80vw; }
+    .arco { width: 84vw; }
     .arco-rodape { flex-direction: column; align-items: flex-start; margin-top: 40px; }
     .palco-abertura { padding-bottom: 64px; }
     .barra-marca span { display: none; }
@@ -216,7 +225,7 @@
     .passo { min-height: 0; padding: 0 0 48px; }
     .passos::before, .passos::after { display: none; }
     .passo h3 { color: var(--tinta); }
-    .passo img, .passo video { display: block; width: 100%; height: auto; margin-top: 18px; border-radius: 8px; border: 1px solid var(--fio-folha); }
+    .passo video { display: block; width: 100%; height: auto; margin-top: 18px; border-radius: 8px; border: 1px solid var(--fio-folha); }
     .situacoes { margin-bottom: 80px; }
     .situacoes dl > div { grid-template-columns: 1fr; gap: 4px; }
     .perguntas { padding: 64px 0; }
@@ -224,13 +233,11 @@
     header nav a:not(.sempre) { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .js .entrou h1 .linha, .js .entrou .lead, .js .entrou .acao, .js .entrou .celular, .js .entrou .alternativa { animation: sobe-leve .3s ease both; }
-    @keyframes sobe-leve { from { opacity: 0; } to { opacity: 1; } }
+    h1 .linha, .lead, .acao, .celular, .meta, .alternativa, .arco { animation: aparece .3s ease both; }
+    @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
     .tela > *, .tela > .sai, .tela > .volta, .tela > .de-cima:not(.ativo) { transform: none; transition: opacity .3s ease; }
     .tela, .arco { transform: none; }
-    .janela { transition: opacity .3s ease; }
-    .barra { transition: none; }
-    .situacoes dt { transition: none; }
+    .barra, .situacoes dt, .janela.lado { transition: none; }
   }
 </style>
 </head>
@@ -238,7 +245,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="icone" viewBox="0 0 256 256"><rect width="256" height="256" rx="58" fill="#16140F"/><rect x="62" y="40" width="132" height="176" rx="10" fill="#3A352B" transform="rotate(-7 128 128)"/><rect x="70" y="36" width="132" height="176" rx="10" fill="#CFC6B3" transform="rotate(3 136 124)"/><rect x="62" y="34" width="132" height="178" rx="10" fill="#F7F3EA"/><rect x="84" y="62" width="50" height="12" rx="6" fill="#B4412B"/><g fill="#2B2820"><rect x="84" y="96" width="88" height="7" rx="3.5"/><rect x="84" y="116" width="70" height="7" rx="3.5" opacity=".7"/><rect x="84" y="136" width="88" height="7" rx="3.5" opacity=".7"/><rect x="84" y="156" width="56" height="7" rx="3.5" opacity=".7"/></g></symbol></svg>
 
 <div class="wrap">
-  <header><a class="marca" href="./"><svg aria-hidden="true"><use href="#icone"/></svg>Folio</a><nav><a class="sempre" href="#baixar">Baixar</a><a href="#formatos">O que abre</a><a href="#privacidade">Privacidade</a><a href="https://github.com/pedronvitoriano/folio-releases/issues">Ajuda</a></nav></header>
+  <header><a class="marca" href="./"><svg aria-hidden="true"><use href="#icone"/></svg>Folio</a><nav><a class="sempre" href="#baixar">Baixar</a><a href="#formatos">O que abre</a><a href="#perguntas">Perguntas</a><a href="https://github.com/pedronvitoriano/folio-releases/issues">Ajuda</a></nav></header>
 </div>
 
 <main>
@@ -246,41 +253,38 @@
   <div class="abertura" id="abertura">
     <div class="chamada">
       <h1><span class="linha">Abra qualquer</span> <span class="linha">arquivo.</span></h1>
-      <p class="lead">Para quem recebe arquivo de todo tipo: Word, Excel e PDF sem o Office, vídeo sem caçar codec, modelo 3D sem programa de CAD. Mais de 300 formatos num app só, gratuito.</p>
+      <p class="lead">Word, Excel e PDF sem o Office, vídeo sem caçar codec, modelo 3D sem programa de CAD. Mais de 700 tipos de arquivo num app gratuito, que roda no seu computador e não manda seus arquivos para lugar nenhum.</p>
 
-      <div class="acao">
+      <div class="acao so-computador">
         <a class="baixar" id="principal" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span id="principal-texto">Baixar para Windows</span></a>
       </div>
-      <p class="meta" id="principal-meta">Grátis e sem cadastro. Instala sem pedir administrador.</p>
+      <p class="meta so-computador" id="principal-meta">Grátis e sem cadastro. Instala sem pedir administrador.</p>
       <p class="aviso" id="aviso-topo" role="status"></p>
-      <p class="alternativa" id="alternativa">Usa outro sistema? <a href="#baixar">Veja todas as versões</a>.</p>
+      <p class="alternativa so-computador" id="alternativa">Usa outro sistema? <a href="#baixar">Veja todas as versões</a>.</p>
 
-      <div class="celular">
+      <div class="celular so-celular">
         <p>O Folio é um app para computador. Mande o link para você mesmo e baixe no Windows, no Mac ou no Linux.</p>
-        <button class="baixar" id="enviar-link" type="button"><span class="aba" aria-hidden="true"></span>Enviar o link para o computador</button>
-        <span class="copiado" id="copiado" role="status"></span>
+        <button class="baixar enviar-link" type="button"><span class="aba" aria-hidden="true"></span>Enviar o link para o computador</button>
+        <span class="copiado" role="status"></span>
       </div>
     </div>
   </div>
 </div>
 
 <div class="palco-abertura">
-  <div class="arco" id="arco" role="img" aria-label="Arquivos de vários tipos abertos no Folio: um relatório do Word, uma planilha, um modelo 3D, uma apresentação, um vídeo, um PDF, código e uma música.">
-        <div class="janela" data-nome="relatorio-trimestral.docx" data-tipo="Word, com a aparência original"><img src="img/cap-word.webp" srcset="img/cap-word-p.webp 760w, img/cap-word.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt="" fetchpriority="high"></div>
-        <div class="janela" data-nome="vendas-2026.xlsx" data-tipo="Excel, com as fórmulas calculadas"><img src="img/cap-excel.webp" srcset="img/cap-excel-p.webp 760w, img/cap-excel.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="cena-animada.glb" data-tipo="modelo 3D, com medidas e materiais"><img src="img/cap-3d.webp" srcset="img/cap-3d-p.webp 760w, img/cap-3d.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="exemplo.pptx" data-tipo="PowerPoint, pronto para apresentar"><img data-srcset="img/cap-powerpoint-p.webp 760w, img/cap-powerpoint.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="fractal.mp4" data-tipo="vídeo, sem instalar codecs"><img data-srcset="img/cap-video-p.webp 760w, img/cap-video.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="pao-de-fermentacao-natural.pdf" data-tipo="PDF, para ler, anotar e assinar"><img data-srcset="img/cap-pdf-p.webp 760w, img/cap-pdf.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="analise.py" data-tipo="código, com cores por linguagem"><img src="img/cap-codigo.webp" srcset="img/cap-codigo-p.webp 760w, img/cap-codigo.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
-        <div class="janela" data-nome="melodia.mp3" data-tipo="música, com a forma da onda"><img src="img/cap-musica.webp" srcset="img/cap-musica-p.webp 760w, img/cap-musica.webp 1400w" sizes="(max-width: 900px) 80vw, 640px" width="1400" height="798" alt=""></div>
+  <div class="arco" id="arco">
+    <div class="janela janela-filme"><video id="filme" muted loop playsinline preload="none" poster="img/filme.webp" width="1280" height="730" aria-label="O Folio em uso: um relatório do Word, uma planilha em que o total muda ao editar uma célula, uma apresentação, um PDF, um vídeo, um modelo 3D, código sendo digitado e uma música tocando." data-marcas='[{"nome":"word","t":0,"arquivo":"relatorio-trimestral.docx","tipo":"Word, com a aparência original"},{"nome":"excel","t":3.67,"arquivo":"vendas-2026.xlsx","tipo":"Excel: mudou a célula, o total recalcula"},{"nome":"powerpoint","t":8.2,"arquivo":"exemplo.pptx","tipo":"PowerPoint, slide a slide"},{"nome":"pdf","t":12.53,"arquivo":"pao-de-fermentacao-natural.pdf","tipo":"PDF, para ler, anotar e assinar"},{"nome":"video","t":16.47,"arquivo":"fractal.mp4","tipo":"vídeo, sem instalar codec"},{"nome":"3d","t":21.93,"arquivo":"cena-animada.glb","tipo":"modelo 3D, com a animação tocando"},{"nome":"codigo","t":27.37,"arquivo":"analise.py","tipo":"código, com cores por linguagem"},{"nome":"musica","t":31.7,"arquivo":"melodia.mp3","tipo":"música, com a forma da onda"}]'><source src="img/filme.mp4" type="video/mp4"></video></div>
+    <div class="janela lado" data-ir="pdf" data-k="-2" aria-hidden="true"><img src="img/clip-pdf.webp" width="1120" height="638" alt="" loading="lazy"></div>
+    <div class="janela lado" data-ir="excel" data-k="-1" aria-hidden="true"><img src="img/clip-excel.webp" width="1120" height="638" alt=""></div>
+    <div class="janela lado" data-ir="3d" data-k="1" aria-hidden="true"><img src="img/clip-3d.webp" width="1120" height="638" alt=""></div>
+    <div class="janela lado" data-ir="powerpoint" data-k="2" aria-hidden="true"><img src="img/clip-powerpoint.webp" width="1120" height="638" alt="" loading="lazy"></div>
   </div>
   <div class="arco-rodape wrap">
     <p class="legenda" id="legenda" aria-hidden="true"><b>relatorio-trimestral.docx</b> Word, com a aparência original</p>
-    <div class="controles" id="controles" hidden>
-      <button type="button" id="anterior" aria-label="Tela anterior"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="controles" id="controles">
+      <button type="button" id="anterior" aria-label="Arquivo anterior do vídeo"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button type="button" class="pausa" id="pausa">Pausar</button>
-      <button type="button" id="proxima" aria-label="Próxima tela"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" id="proxima" aria-label="Próximo arquivo do vídeo"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </div>
@@ -298,34 +302,36 @@
       </dl>
     </div>
     <div class="passeio-cabeca">
-      <h2>Cada arquivo abre do jeito certo</h2>
-      <p>O Folio reconhece o tipo do arquivo e mostra o visualizador feito para ele. Estas são telas reais do app.</p>
+      <h2>Um visualizador feito para cada tipo</h2>
+      <p>O Folio reconhece o arquivo e abre do jeito que ele foi feito para ser visto. Os vídeos abaixo são o app de verdade, gravado em uso.</p>
     </div>
     <div class="trilho">
       <ol class="passos" id="passos">
-        <li class="passo ativo" data-tela="0"><h3>Documentos do Word</h3><p>Cabeçalho, tabelas, listas e fontes aparecem como no Word, para ler e editar, num computador sem o Office.</p><p class="formatos">.docx, .doc, .odt, .rtf, .pages</p><img src="img/cap-word-p.webp" width="760" height="433" loading="lazy" alt="Relatório do Word aberto no Folio, com título, tabela de vendas por canal e lista de próximos passos."></li>
-        <li class="passo" data-tela="1"><h3>Planilhas</h3><p>Fórmulas calculadas, moeda, porcentagem e cabeçalho congelado, como você deixou no Excel.</p><p class="formatos">.xlsx, .xls, .ods, .csv, .numbers</p><img src="img/cap-excel-p.webp" width="760" height="433" loading="lazy" alt="Planilha de vendas por mês aberta no Folio, com totais e percentual da meta."></li>
-        <li class="passo" data-tela="2"><h3>Apresentações</h3><p>Slides, anotações e o botão Apresentar, em tela cheia, sem o PowerPoint.</p><p class="formatos">.pptx, .ppt, .odp, .key</p><img src="img/cap-powerpoint-p.webp" width="760" height="433" loading="lazy" alt="Apresentação aberta no Folio, com a lista de slides à esquerda e o slide de título."></li>
-        <li class="passo" data-tela="3"><h3>PDF</h3><p>Leia, selecione o texto, anote e assine. Dá para apresentar o PDF como slides.</p><p class="formatos">.pdf, .xps, .djvu</p><img src="img/cap-pdf-p.webp" width="760" height="433" loading="lazy" alt="Receita em PDF aberta no Folio, com tabela de ingredientes e modo de preparo."></li>
-        <li class="passo" data-tela="4"><h3>Vídeos e músicas</h3><p>Assista e ouça sem procurar codec. Os controles ficam no lugar de sempre, com velocidade e repetição.</p><p class="formatos">.mp4, .mkv, .avi, .mov, .mp3, .wav, .aiff</p><img src="img/cap-video-p.webp" width="760" height="433" loading="lazy" alt="Vídeo aberto no Folio, com o player e a barra de tempo."></li>
-        <li class="passo" data-tela="5"><h3>Modelos 3D</h3><p>Gire, aproxime e veja medidas, malhas e materiais. Se o modelo tem animação, ela toca: o vídeo é o Folio de verdade, no tema escuro.</p><p class="formatos">.glb, .gltf, .obj, .stl, .fbx, .3mf, .step</p><video class="passo-video" muted loop playsinline preload="none" data-poster="img/cap-3d-anim.webp" width="1400" height="798" aria-label="Cena 3D animada no Folio: um nó vermelho gira e quica ao lado de um cone e de uma esfera, com o painel de medidas à direita."><source src="img/cap-3d-anim.webm" type="video/webm"><source src="img/cap-3d-anim.mp4" type="video/mp4"></video></li>
-        <li class="passo" data-tela="6"><h3>Código e pastas compactadas</h3><p>Código com cores por linguagem, e .zip, .rar e .7z abertos como pasta, sem extrair tudo antes.</p><p class="formatos">.py, .js, .ts, .json, .zip, .rar, .7z</p><img src="img/cap-codigo-p.webp" width="760" height="433" loading="lazy" alt="Arquivo de código Python aberto no Folio, com numeração de linhas."></li>
+        <li class="passo ativo" data-tela="0"><h3>Documentos do Word</h3><p>Cabeçalho, tabelas, listas e fontes aparecem como no Word, para ler e editar, num computador sem o Office.</p><p class="formatos">.docx, .doc, .odt, .rtf, .pages</p><video muted playsinline preload="none" data-poster="img/clip-word.webp" width="1120" height="638" aria-label="Relatório do Word aberto no Folio, rolando pelo título, pela tabela de vendas e pelos próximos passos."><source src="img/clip-word.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="1"><h3>Planilhas</h3><p>Mude um número e o total recalcula na hora. Moeda, porcentagem e cabeçalho congelado como você deixou no Excel.</p><p class="formatos">.xlsx, .xls, .ods, .csv, .numbers</p><video muted playsinline preload="none" data-poster="img/clip-excel.webp" width="1120" height="638" aria-label="Planilha de vendas no Folio: o valor de janeiro é trocado e o total e o percentual da meta mudam."><source src="img/clip-excel.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="2"><h3>Apresentações</h3><p>Slides, anotações e o botão Apresentar, em tela cheia, sem o PowerPoint.</p><p class="formatos">.pptx, .ppt, .odp, .key</p><video muted playsinline preload="none" data-poster="img/clip-powerpoint.webp" width="1120" height="638" aria-label="Apresentação no Folio, trocando de slide pelas miniaturas."><source src="img/clip-powerpoint.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="3"><h3>PDF</h3><p>Leia, selecione o texto, anote e assine. Dá para apresentar o PDF como slides.</p><p class="formatos">.pdf, .xps, .djvu</p><video muted playsinline preload="none" data-poster="img/clip-pdf.webp" width="1120" height="638" aria-label="Receita em PDF no Folio, rolando pela tabela de ingredientes e pelo modo de preparo."><source src="img/clip-pdf.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="4"><h3>Vídeos e músicas</h3><p>Assista e ouça sem procurar codec. Os controles ficam no lugar de sempre, com velocidade e repetição.</p><p class="formatos">.mp4, .mkv, .avi, .mov, .mp3, .wav, .aiff</p><video muted playsinline preload="none" data-poster="img/clip-video.webp" width="1120" height="638" aria-label="Vídeo tocando no player do Folio."><source src="img/clip-video.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="5"><h3>Modelos 3D</h3><p>Gire, aproxime e veja medidas, malhas e materiais. Se o modelo tem animação, ela toca.</p><p class="formatos">.glb, .gltf, .obj, .stl, .fbx, .3mf, .step</p><video muted playsinline preload="none" data-poster="img/clip-3d.webp" width="1120" height="638" aria-label="Cena 3D animada no Folio, com o cursor girando a câmera."><source src="img/clip-3d.mp4" type="video/mp4"></video></li>
+        <li class="passo" data-tela="6"><h3>Código e pastas compactadas</h3><p>Código com cores por linguagem, e .zip, .rar e .7z abertos como pasta, sem extrair tudo antes.</p><p class="formatos">.py, .js, .ts, .json, .zip, .rar, .7z</p><video muted playsinline preload="none" data-poster="img/clip-codigo.webp" width="1120" height="638" aria-label="Código Python no Folio, com uma linha nova sendo digitada e colorida."><source src="img/clip-codigo.mp4" type="video/mp4"></video></li>
       </ol>
       <div class="palco-col" aria-hidden="true">
         <div class="palco"><div class="tela" id="tela">
-          <img class="ativo" src="img/cap-word.webp" width="1400" height="798" alt="">
-          <img src="img/cap-excel.webp" width="1400" height="798" alt="" loading="lazy">
-          <img src="img/cap-powerpoint.webp" width="1400" height="798" alt="" loading="lazy">
-          <img src="img/cap-pdf.webp" width="1400" height="798" alt="" loading="lazy">
-          <img src="img/cap-video.webp" width="1400" height="798" alt="" loading="lazy">
-          <video muted loop playsinline preload="none" data-poster="img/cap-3d-anim.webp" width="1400" height="798"><source src="img/cap-3d-anim.webm" type="video/webm"><source src="img/cap-3d-anim.mp4" type="video/mp4"></video>
-          <img src="img/cap-codigo.webp" width="1400" height="798" alt="" loading="lazy">
+          <video class="ativo" muted playsinline preload="metadata" poster="img/clip-word.webp" width="1120" height="638"><source src="img/clip-word.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-excel.webp" width="1120" height="638"><source src="img/clip-excel.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-powerpoint.webp" width="1120" height="638"><source src="img/clip-powerpoint.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-pdf.webp" width="1120" height="638"><source src="img/clip-pdf.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-video.webp" width="1120" height="638"><source src="img/clip-video.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-3d.webp" width="1120" height="638"><source src="img/clip-3d.mp4" type="video/mp4"></video>
+          <video muted playsinline preload="none" data-poster="img/clip-codigo.webp" width="1120" height="638"><source src="img/clip-codigo.mp4" type="video/mp4"></video>
         </div></div>
       </div>
     </div>
     <div class="fecho">
       <h2>Tudo isso num app só, de graça.</h2>
-      <a class="baixar escuro" id="fecho-baixar" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span class="rotulo-baixar">Baixar para Windows</span></a>
+      <a class="baixar escuro so-computador" id="fecho-baixar" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span class="rotulo-baixar">Baixar para Windows</span></a>
+      <div class="so-celular"><button class="baixar escuro enviar-link" type="button"><span class="aba" aria-hidden="true"></span>Enviar o link para o computador</button><span class="copiado" role="status"></span></div>
+      <p class="aviso" id="aviso-fecho" role="status"></p>
       <p>Sem cadastro e sem propaganda. Seus arquivos não saem do computador.</p>
     </div>
     <div class="tambem">
@@ -342,7 +348,8 @@
       <div class="seu-sistema" aria-live="polite">
         <p class="rotulo" id="rotulo-sistema">Versão para</p>
         <p class="nome" id="nome-sistema">Windows 10 e 11</p>
-        <a class="baixar" id="baixar-painel" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span id="baixar-painel-texto">Baixar para Windows</span></a>
+        <a class="baixar so-computador" id="baixar-painel" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span id="baixar-painel-texto">Baixar para Windows</span></a>
+        <div class="so-celular"><button class="baixar enviar-link" type="button"><span class="aba" aria-hidden="true"></span>Enviar o link para o computador</button><span class="copiado" role="status"></span></div>
         <p class="aviso" id="aviso-painel" role="status"></p>
         <ol class="instalar" id="instalar">
           <li>Abra o arquivo baixado e clique em <b>Extrair tudo</b>.</li>
@@ -351,20 +358,21 @@
         </ol>
       </div>
       <div class="outros">
-        <h3>Outros sistemas</h3>
+        <h3 id="outros-titulo">Outros sistemas</h3>
         <p class="nota">Escolha um para ver como instalar, ou baixe direto.</p>
-        <ul class="lista" id="lista">
-          <li><button type="button" data-so="windows" aria-current="true">Windows 10 e 11</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip">.zip <span class="tam" data-tam="Folio-windows-x64.zip"></span></a></li>
-          <li><button type="button" data-so="mac-arm">Mac com chip Apple (M1 ou mais novo)</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-macos-arm64.dmg">.dmg <span class="tam" data-tam="Folio-macos-arm64.dmg"></span></a></li>
-          <li><button type="button" data-so="mac-intel">Mac com Intel</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-macos-intel.dmg">.dmg <span class="tam" data-tam="Folio-macos-intel.dmg"></span></a></li>
-          <li><button type="button" data-so="linux-deb">Ubuntu, Debian e Mint</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-linux-amd64.deb">.deb <span class="tam" data-tam="Folio-linux-amd64.deb"></span></a></li>
-          <li><button type="button" data-so="linux">Linux, qualquer distribuição</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-linux-x86_64.AppImage">AppImage <span class="tam" data-tam="Folio-linux-x86_64.AppImage"></span></a></li>
+        <ul class="lista" id="lista" aria-labelledby="outros-titulo">
+          <li data-so="windows" data-arq="Folio-windows-x64.zip"><button type="button" aria-pressed="true">Windows 10 e 11</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip">.zip <span class="tam" data-tam="Folio-windows-x64.zip"></span></a></li>
+          <li data-so="mac-arm" data-arq="Folio-macos-arm64.dmg"><button type="button" aria-pressed="false">Mac com chip Apple (M1 ou mais novo)</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-macos-arm64.dmg">.dmg <span class="tam" data-tam="Folio-macos-arm64.dmg"></span></a></li>
+          <li data-so="mac-intel" data-arq="Folio-macos-intel.dmg"><button type="button" aria-pressed="false">Mac com Intel</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-macos-intel.dmg">.dmg <span class="tam" data-tam="Folio-macos-intel.dmg"></span></a></li>
+          <li data-so="linux-deb" data-arq="Folio-linux-amd64.deb"><button type="button" aria-pressed="false">Ubuntu, Debian e Mint</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-linux-amd64.deb">.deb <span class="tam" data-tam="Folio-linux-amd64.deb"></span></a></li>
+          <li data-so="linux" data-arq="Folio-linux-x86_64.AppImage"><button type="button" aria-pressed="false">Linux, qualquer distribuição</button><a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-linux-x86_64.AppImage">AppImage <span class="tam" data-tam="Folio-linux-x86_64.AppImage"></span></a></li>
         </ul>
         <details>
           <summary>Ver detalhes técnicos</summary>
           <p id="versao-nota">Os links levam sempre à versão mais recente. Depois de instalado, o Folio avisa quando houver versão nova.</p>
           <ul>
-            <li>Requisitos: Windows 10 ou 11 de 64 bits; macOS 11 ou mais novo; Linux de 64 bits com WebKitGTK (já vem nas distribuições comuns).</li>
+            <li>Requisitos: Windows 10 ou 11 de 64 bits; macOS 11 ou mais novo; Linux de 64 bits com WebKitGTK (já vem nas distribuições comuns). Cerca de 100 MB livres em disco.</li>
+            <li>Windows 11 em processador ARM: a versão x64 roda pela emulação do próprio Windows; ainda não há versão ARM nativa.</li>
             <li>Confira a integridade com o arquivo <a href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/SHA256SUMS">SHA256SUMS</a> da versão.</li>
             <li>No Ubuntu pelo terminal: <code>sudo apt install ./Folio-linux-amd64.deb</code></li>
             <li>Todas as versões e notas: <a href="https://github.com/pedronvitoriano/folio-releases/releases">página de versões no GitHub</a>.</li>
@@ -382,7 +390,8 @@
       <details><summary>É grátis mesmo?</summary><p>Sim, para uso pessoal e profissional, em quantos computadores você quiser. Não tem cadastro, plano pago nem propaganda. As regras estão nos <a href="termos.html">termos de uso</a>.</p></details>
       <details><summary>Precisa de internet?</summary><p>Não para abrir e editar arquivos: tudo roda no seu computador. A internet só entra quando você usa o assistente de IA ou baixa uma atualização.</p></details>
       <details><summary>Por que o Windows ou o Mac avisam na primeira vez?</summary><p>As versões ainda saem sem a assinatura digital paga da Microsoft e da Apple, então o sistema pede uma confirmação. Os passos acima mostram onde clicar. Se quiser conferir que o arquivo não foi alterado, compare com o SHA256SUMS em "Ver detalhes técnicos".</p></details>
-      <details><summary>Abre arquivo que o meu programa de sempre não abre?</summary><p>Muitas vezes, sim: o Folio reconhece mais de 700 extensões e tem visualizador próprio para cada família. Se um arquivo não abrir, conte em <a href="https://github.com/pedronvitoriano/folio-releases/issues">Ajuda e problemas</a> qual é o formato.</p></details>
+      <details><summary>Abre arquivo que o meu programa de sempre não abre?</summary><p>Muitas vezes, sim: o Folio reconhece mais de 700 tipos de arquivo e tem visualizador próprio para cada família. Se um arquivo não abrir, conte em <a href="https://github.com/pedronvitoriano/folio-releases/issues">Ajuda e problemas</a> qual é o formato.</p></details>
+      <details><summary>Fica igual ao Word, ao Excel e ao PowerPoint?</summary><p>Muito próximo: fontes, tabelas, cabeçalhos, fórmulas e slides aparecem como no original. Recursos raros podem sair diferentes; se encontrar um, mande o arquivo de exemplo em <a href="https://github.com/pedronvitoriano/folio-releases/issues">Ajuda e problemas</a> que ele entra nos testes.</p></details>
       <details><summary>Meu arquivo vai para algum servidor?</summary><p>Não. Só sai do computador o que você pede: a pergunta ao assistente de IA da sua conta e o diagnóstico de erro que você aceitar enviar. Os detalhes estão abaixo e na <a href="privacidade.html">política de privacidade</a>.</p></details>
     </div>
   </div>
@@ -403,6 +412,7 @@
 
 <div class="barra" id="barra" aria-hidden="true" inert>
   <span class="barra-marca"><svg aria-hidden="true"><use href="#icone"/></svg>Folio <span>grátis para Windows, Mac e Linux</span></span>
+  <p class="aviso" id="aviso-barra" role="status"></p>
   <a class="baixar" id="barra-baixar" href="https://github.com/pedronvitoriano/folio-releases/releases/latest/download/Folio-windows-x64.zip"><span class="aba" aria-hidden="true"></span><span class="rotulo-baixar">Baixar para Windows</span></a>
 </div>
 
