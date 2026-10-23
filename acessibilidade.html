@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acessibilidade: Folio</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#16140F">
+<style>@font-face { font-family: 'Newsreader'; src: url(fonts/newsreader-latin-wght-normal.woff2) format('woff2'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url(fonts/inter-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+:root { --mesa: #16140F; --luz: #ECE6D8; --luz-2: #BDB5A5; --folha: #F7F3EA; --fio: #E0D8C8; --tinta: #1B1A17; --tinta-2: #4A463E; --aba: #B4412B; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--folha); color: var(--tinta); font: 400 17px/1.65 Inter, 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--aba); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--aba); outline-offset: 3px; border-radius: 4px; }
+.topo { background: var(--mesa); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+.topo .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; padding-bottom: 20px; max-width: 1200px; }
+.marca { display: inline-flex; align-items: center; gap: 10px; color: var(--luz); font: 600 22px/1 Newsreader, Georgia, serif; text-decoration: none; }
+.marca img { width: 30px; height: 30px; }
+.topo nav a { color: var(--luz-2); text-decoration: none; margin-left: 22px; font-size: 15px; }
+.doc { padding: 56px 0 64px; }
+.doc h1 { font: 560 clamp(36px, 6vw, 52px)/1.05 Newsreader, Georgia, serif; letter-spacing: -0.02em; margin: 0 0 24px; }
+.doc h2 { font: 560 24px/1.2 Newsreader, Georgia, serif; margin: 36px 0 10px; }
+.doc p, .doc li { color: var(--tinta-2); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.5; display: block; overflow-x: auto; }
+.doc th { text-align: left; font-weight: 600; padding: 10px 12px 10px 0; border-bottom: 2px solid var(--fio); vertical-align: bottom; }
+.doc td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--fio); vertical-align: top; color: var(--tinta-2); }
+footer { border-top: 1px solid var(--fio); padding: 24px 0 48px; font-size: 14px; }
+footer a { color: var(--tinta-2); margin-right: 20px; }</style></head><body>
+<div class="topo"><div class="wrap"><a class="marca" href="./"><img src="favicon.svg" alt="">Folio</a><nav><a href="./#baixar">Baixar</a></nav></div></div>
+<main class="wrap doc"><h1>Acessibilidade do site do Folio</h1>
+<p><strong>Versão de 22 de outubro de 2026.</strong> Esta declaração vale para o site de download (folio.pedronvitoriano.com e a cópia
+no GitHub Pages).</p>
+<h2>Meta</h2>
+<p>O site busca o nível AA das Diretrizes de Acessibilidade para Conteúdo Web (WCAG 2.2).</p>
+<h2>O que foi feito e conferido</h2>
+<ul>
+<li><strong>Teclado:</strong> todos os links e botões são alcançados com Tab, na ordem da leitura, com contorno de foco visível.</li>
+<li><strong>Leitor de tela:</strong> um título principal, regiões nomeadas, imagens com descrição e a troca de sistema no painel de
+download anunciada. As capturas que só decoram a animação ficam escondidas do leitor, sem esconder controles.</li>
+<li><strong>Movimento:</strong> a troca automática das telas no topo tem botão <strong>Pausar</strong>, para quando o mouse ou o foco estão nela e
+não acontece quando o sistema pede menos movimento; nesse caso também saem o desfoque e a inclinação.</li>
+<li><strong>Contraste:</strong> todo texto tem pelo menos 4,5:1 sobre o fundo. Isso é conferido automaticamente a cada mudança.</li>
+<li><strong>Tela pequena e zoom:</strong> o site funciona a partir de 320 px de largura sem rolagem lateral, e o zoom não é bloqueado.</li>
+<li><strong>Sem JavaScript:</strong> o conteúdo e todos os downloads continuam disponíveis.</li>
+</ul>
+<h2>Limites conhecidos</h2>
+<ul>
+<li>O site ainda não foi testado com leitores de tela de verdade (NVDA, VoiceOver); as conferências são automáticas.</li>
+<li>As capturas de tela mostram texto pequeno do app como imagem; o que importa delas está escrito ao lado.</li>
+</ul>
+<h2>Encontrou uma barreira?</h2>
+<p>Conte em <a href="https://github.com/pedronvitoriano/folio-releases/issues">https://github.com/pedronvitoriano/folio-releases/issues</a> o que tentou fazer, a página e o navegador. Se
+preferir não escrever em público, use no Folio o menu <code>···</code> › <strong>Reportar um problema</strong>.</p>
+</main>
+<footer><div class="wrap"><a href="./">Início</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos de uso</a><a href="acessibilidade.html">Acessibilidade</a></div></footer></body></html>
