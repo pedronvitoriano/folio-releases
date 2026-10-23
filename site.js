@@ -81,15 +81,17 @@
     }
   }
 
-  // Barra de download: aparece quando o botão do topo sai da tela e some na seção de download
-  var barra = $('barra'), topoFora = false, naSecao = false;
+  // Barra de download: aparece quando o botão do topo sai da tela e some na seção de download e no rodapé
+  // (perto do fim ela cobriria os links de privacidade e termos)
+  var barra = $('barra'), topoFora = false, naSecao = false, noRodape = false;
   var mostrarBarra = function () {
-    var ver = topoFora && !naSecao && !document.body.classList.contains('mobile');
+    var ver = topoFora && !naSecao && !noRodape && !document.body.classList.contains('mobile');
     barra.classList.toggle('visivel', ver);
     if (ver) { barra.removeAttribute('aria-hidden'); barra.inert = false; } else { barra.setAttribute('aria-hidden', 'true'); barra.inert = true; }
   };
   new IntersectionObserver(function (e) { topoFora = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; mostrarBarra(); }).observe($('principal'));
   new IntersectionObserver(function (e) { naSecao = e[0].isIntersecting; mostrarBarra(); }, { threshold: 0.15 }).observe($('baixar'));
+  new IntersectionObserver(function (e) { noRodape = e[0].isIntersecting; mostrarBarra(); }, { rootMargin: '0px 0px 120px 0px' }).observe(document.querySelector('footer'));
 
   // Passeio: a etapa no meio da tela troca o arquivo do palco; o palco se endireita ao entrar
   var passos = [].slice.call(document.querySelectorAll('.passo')), telas = [].slice.call(document.querySelectorAll('#tela > *')), tela = $('tela'), atual = 0;
