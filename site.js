@@ -1,6 +1,6 @@
 // Comportamento da página de download: o filme do app em uso no topo (com as outras telas em arco), o passeio por
 // formatos com os clipes, a barra de download e o download do sistema de quem visita.
-// Sem JavaScript a página continua completa: o filme toca sozinho, o botão leva ao Windows e a lista tem os outros.
+// Sem JavaScript a página continua completa: o filme fica no pôster, o botão leva ao Windows e a lista tem os outros.
 (function () {
   var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fino = matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -30,25 +30,29 @@
     }, 220);
   }
   filme.addEventListener('timeupdate', function () { mostrarLegenda(marcaEm(filme.currentTime)); });
-  var parado = reduz;
-  function tocar() { if (!parado) { filme.preload = 'auto'; filme.play().catch(function () {}); } }
+  // o filme (1,9 MB) só baixa depois que a página terminou de carregar; no celular, com economia de dados ou com
+  // movimento reduzido ele espera a pessoa apertar Tocar
+  var economia = reduz || matchMedia('(max-width: 900px)').matches || !!(navigator.connection && navigator.connection.saveData);
+  var parado = economia, pronto = false;
+  function tocar() { if (!parado && pronto) { filme.preload = 'auto'; filme.play().catch(function () {}); } }
+  addEventListener('load', function () { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { pronto = true; if (arco.getBoundingClientRect().top < innerHeight) tocar(); }); });
   function irPara(i) {
     if (i < 0) return;
     var n = (i + marcas.length) % marcas.length;
     filme.currentTime = marcas[n].t + 0.05;
     mostrarLegenda(n);
     if (parado) { parado = false; pausa.textContent = 'Pausar'; }
-    tocar();
+    pronto = true; tocar();
   }
   $('anterior').addEventListener('click', function () { var i = marcaEm(filme.currentTime); irPara(filme.currentTime - marcas[i].t > 1.2 ? i : i - 1); });
   $('proxima').addEventListener('click', function () { irPara(marcaEm(filme.currentTime) + 1); });
   pausa.addEventListener('click', function () {
-    parado = !parado;
+    parado = !parado; pronto = true;
     if (parado) filme.pause(); else tocar();
     pausa.textContent = parado ? 'Tocar' : 'Pausar';
   });
   // o filme só baixa para tocar: com movimento reduzido fica no pôster até a pessoa apertar Tocar
-  if (reduz) pausa.textContent = 'Tocar';
+  if (economia) pausa.textContent = 'Tocar';
   // fora da tela o filme para (economiza bateria) e volta de onde estava
   new IntersectionObserver(function (e) { if (e[0].isIntersecting) tocar(); else filme.pause(); }).observe(arco);
   document.addEventListener('visibilitychange', function () { if (document.hidden) filme.pause(); else tocar(); });

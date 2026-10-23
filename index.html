@@ -27,9 +27,9 @@
   /* reservas calibradas: ocupam a mesma largura das fontes do site, então nada pula quando elas chegam
      (larguras medidas no Chrome: Newsreader = 83,3% da Georgia e 99,9% da Times; Inter = 108,5% da Segoe UI e 105,8% da Arial) */
   @font-face { font-family: 'Newsreader-G'; src: local('Georgia'); size-adjust: 83.3%; }
-  @font-face { font-family: 'Newsreader-T'; src: local('Times New Roman'); size-adjust: 99.9%; }
+  @font-face { font-family: 'Newsreader-T'; src: local('Times New Roman'), local('Liberation Serif'), local('Tinos'); size-adjust: 99.9%; } /* Liberation e Tinos têm as medidas da Times (Linux) */
   @font-face { font-family: 'Inter-S'; src: local('Segoe UI'); size-adjust: 108.5%; }
-  @font-face { font-family: 'Inter-A'; src: local('Arial'); size-adjust: 105.8%; }
+  @font-face { font-family: 'Inter-A'; src: local('Arial'), local('Liberation Sans'), local('Arimo'); size-adjust: 105.8%; } /* Liberation Sans e Arimo têm as medidas da Arial (Linux) */
   /* materiais do ícone do Folio: a mesa escura, a folha creme e a aba terracota (assets/icon.html) */
   :root {
     --mesa: #16140F; --mesa-2: #1E1B15; --mesa-3: #2A261E; --fio-mesa: #322D24;
